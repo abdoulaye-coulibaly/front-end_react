@@ -14,12 +14,12 @@ export const Admin = () => {
   const get_usert = async () => {
     if (token !== null) {
       const headers = { Authorization: "Bearer " + token }; // auth header with bearer token
-      const userData = await axios.get("front-micro-service.onrender.com/me", { headers });
+      const userData = await axios.get("https://front-micro-service.onrender.com/me", { headers });
       setUserD(userData.data);
       console.log(userData);
       if (userData.data.isAdmin === "admin") {
         const reponse = await axios.get(
-          "front-micro-service.onrender.com/service/" + userData.data._id
+          "https://front-micro-service.onrender.com/service/" + userData.data._id
         );
         setCompoo(reponse.data.service);
         setUserD(reponse.data);
@@ -32,12 +32,12 @@ export const Admin = () => {
   };
   const [userList, setUserList] = useState([]);
   const getUser = async () => {
-    const data = await axios.get("front-micro-service.onrender.com/all_user");
+    const data = await axios.get("https://front-micro-service.onrender.com/all_user");
     setUserList(data.data);
     console.log(userList);
   };
   const deletUser = async (id) => {
-    const data = await axios.delete("front-micro-service.onrender.com/user/" + id);
+    const data = await axios.delete("https://front-micro-service.onrender.com/user/" + id);
     console.log(data);
     getUser();
   };

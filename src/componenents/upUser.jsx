@@ -13,7 +13,7 @@ export const Upuser = () => {
 
     const getinfo = async () => {
         try {
-            const infos = await axios.get("front-micro-service.onrender.com/user/" + id);
+            const infos = await axios.get("https://front-micro-service.onrender.com/user/" + id);
             setUserFull(infos.data.fullname);
             setUname(infos.data.username);
         } catch (error) {
@@ -29,7 +29,7 @@ export const Upuser = () => {
             fullname: userFull,
         };
         try {
-            const data = await axios.put("front-micro-service.onrender.com/user/" + id, form);
+            const data = await axios.put("https://front-micro-service.onrender.com/user/" + id, form);
             console.log("Utilisateur mis à jour :", data);
             setMessage("Utilisateur mis à jour avec succès !");
         } catch (error) {
@@ -44,7 +44,7 @@ export const Upuser = () => {
             password: Npass
         };
         try {
-            const data = await axios.put("front-micro-service.onrender.com/user/" + id, form);
+            const data = await axios.put("https://front-micro-service.onrender.com/user/" + id, form);
             setNPass("");
             console.log("Mot de passe mis à jour :", data);
             setMessage("Mot de passe mis à jour avec succès !"); 

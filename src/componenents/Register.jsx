@@ -23,7 +23,7 @@ export const Register = () => {
       } else if (form.password !== form.passwordConfirm) {
         return setErrorMessage("password and password confirm don't match");
       }
-      const { data } = await axios.post("front-micro-service.onrender.com/signup", form);
+      const { data } = await axios.post("https://front-micro-service.onrender.com/signup", form);
       console.log(data.response);
       navigate("/login");
     } catch (error) {
