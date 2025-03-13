@@ -12,7 +12,7 @@ import axios from 'axios';
         event.preventDefault();
     
         try {
-          const response = await axios.post('http://127.0.0.1:8000/api/posts', {
+          const response = await axios.post('front-micro-service.onrender.com/api/posts', {
             title,
             description,
           });

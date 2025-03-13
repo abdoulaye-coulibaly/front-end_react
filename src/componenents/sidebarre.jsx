@@ -19,7 +19,7 @@ export function Side() {
   const get_user = async () => {
     if (token !== null) {
       const headers = { Authorization: "Bearer " + token }; // auth header with bearer token
-      const userData = await axios.get("http://localhost:3000/me", { headers });
+      const userData = await axios.get("front-micro-service.onrender.com/me", { headers });
       if (userData.data.isAdmin === "admin") {
         setAdmin(true);
       }

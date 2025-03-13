@@ -15,7 +15,7 @@ export  function Profil(){
   const get_user = async () => {
     if (token !== null) {
       const headers = { Authorization: "Bearer " + token }; // auth header with bearer token
-      const userData = await axios.get("http://localhost:3000/me", { headers });
+      const userData = await axios.get("front-micro-service.onrender.com/me", { headers });
       setUserFull(userData.data.fullname);
       setUname(userData.data.username);
       setPass(userData.data.password)
@@ -31,7 +31,7 @@ const handleSubmit = async(event)=>{
       username : uName,
       fullname: userFull
     }
-     const data = await axios.put("http://localhost:3000/user/"+uid,form)
+     const data = await axios.put("front-micro-service.onrender.com/user/"+uid,form)
      console.log(data)
 }
  useEffect(() => {

@@ -25,7 +25,7 @@ export const FlightConfig = () => {
     });
     const requestOptions = { serv: nobject };
     const response = await axios.put(
-      "http://localhost:3000/service/67c991d62c894f87513e8c28",
+      "front-micro-service.onrender.com/service/67c991d62c894f87513e8c28",
       requestOptions
     );
     console.log(nobject);

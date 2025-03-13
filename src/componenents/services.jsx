@@ -17,11 +17,11 @@ const Services = () => {
   const get_user = async () => {
     if (token !== null) {
       const headers = { Authorization: "Bearer " + token }; // auth header with bearer token
-      const userData = await axios.get("http://localhost:3000/me", { headers });
+      const userData = await axios.get("front-micro-service.onrender.com/me", { headers });
       setUserD(userData.data);
       if (userData) {
         const response = await axios.get(
-          "http://localhost:3000/service/" + userData.data._id
+          "front-micro-service.onrender.com/service/" + userData.data._id
         );
         setCompoo(response.data.service);
         setUserD(response.data);
@@ -45,7 +45,7 @@ const Services = () => {
   const confirmSelection = async () => {
     let tableau = {};
     const headers = { Authorization: "Bearer " + token }; // auth header with bearer token
-    const userData = await axios.get("http://localhost:3000/me", { headers });
+    const userData = await axios.get("front-micro-service.onrender.com/me", { headers });
     tableau = userData.data.service;
     let count = 0;
     tableau.forEach((element) => {
@@ -57,7 +57,7 @@ const Services = () => {
     const nobject = { id: id, Name: selectedService };
     const requestOptions = { serv: nobject };
     const response = await axios.put(
-      "http://localhost:3000/service/" + userD._id,
+      "front-micro-service.onrender.com/service/" + userD._id,
       requestOptions
     );
     console.log(response);

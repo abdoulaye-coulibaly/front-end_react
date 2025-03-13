@@ -29,12 +29,12 @@ function App() {
   const get_user = async () => {
     if (token !== null) {
       const headers = { Authorization: "Bearer " + token }; // auth header with bearer token
-      const userData = await axios.get("http://localhost:3000/me", { headers });
+      const userData = await axios.get("front-micro-service.onrender.com/me", { headers });
       setUserD(userData.data);
       console.log(userData);
       if (userData) {
         const reponse = await axios.get(
-          "http://localhost:3000/service/" + userData.data._id
+          "front-micro-service.onrender.com/service/" + userData.data._id
         );
         setCompoo(reponse.data.service);
       }

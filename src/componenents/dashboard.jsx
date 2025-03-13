@@ -23,12 +23,12 @@ const Dashboard = () => {
   const get_user = async () => {
     if (token !== null) {
       const headers = { Authorization: "Bearer " + token }; // auth header with bearer token
-      const userData = await axios.get("http://localhost:3000/me", { headers });
+      const userData = await axios.get("front-micro-service.onrender.com/me", { headers });
       setUserD(userData.data);
       console.log(userData);
       if (userData) {
         const reponse = await axios.get(
-          "http://localhost:3000/service/" + userData.data._id
+          "front-micro-service.onrender.com/service/" + userData.data._id
         );
         setCompoo(reponse.data.service);
         setUserD(reponse.data);
@@ -47,7 +47,7 @@ const Dashboard = () => {
     
   const nobject = { Name: service , id: id };
   const requestOptions = { serv: nobject };
-  const response = await axios.put("http://localhost:3000/deleteservice/"+userD._id,requestOptions)
+  const response = await axios.put("front-micro-service.onrender.com/deleteservice/"+userD._id,requestOptions)
   console.log(response)
   get_user()
   }
