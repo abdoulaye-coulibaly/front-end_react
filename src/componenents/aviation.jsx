@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { Search, Plane, MapPin, AlertCircle } from 'lucide-react';
-const Aviation = () => {
+import { Search,Trash2, Plane, MapPin, AlertCircle } from 'lucide-react';
+const Aviation = ({ id, delet }) => {
   const [flightNumber, setFlightNumber] = useState('');
   const [flight, setFlight] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   
-  const AVIATION_STACK_API_KEY = '9e9a4cb9112de11d399fe04e4db48539';
+  const AVIATION_STACK_API_KEY = 'c5f8a7dbae4341af44683c5a136b4566';
 
   const fetchFlightData = async () => {
     if (!flightNumber.trim()) {
@@ -17,7 +17,6 @@ const Aviation = () => {
     setLoading(true);
     setError(null);
     setFlight(null);
-    
     try {
       const response = await fetch(`http://api.aviationstack.com/v1/flights?access_key=${AVIATION_STACK_API_KEY}&flight_iata=${flightNumber.trim()}`);
       
@@ -116,7 +115,6 @@ const Aviation = () => {
     e.preventDefault();
     fetchFlightData();
   };
-  
   const getStatusColorClass = (status) => {
     switch(status) {
       case 'En vol': return 'bg-green-100 text-green-800';
@@ -140,12 +138,19 @@ const Aviation = () => {
   }, [flight]);
 
   return (
-    <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6">
+    <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6 relative">
+      <button 
+        onClick={() => delet(id, "Aviation")}
+        className="absolute top-2 right-2 text-red-500 hover:text-red-700 transition-colors"
+        aria-label="Delete Component"
+      >
+        <Trash2 className="w-6 h-6" />
+      </button>
+      
       <div className="flex items-center justify-center mb-4">
         <Plane className="text-blue-500 mr-2" size={24} />
         <h1 className="text-xl font-bold text-gray-800">Info Vol</h1>
       </div>
-      
       <form onSubmit={handleSubmit} className="mb-6">
         <div className="relative">
           <input

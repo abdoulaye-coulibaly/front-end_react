@@ -1,7 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
+import { Trash2, Search, Github } from 'lucide-react';
 
-const GitHubRepoInfo = ({id,delet}) => {
+const GitHubRepoInfo = ({ id, delet }) => {
   const [owner, setOwner] = useState('');
   const [repo, setRepo] = useState('');
   const [repoInfo, setRepoInfo] = useState(null);
@@ -9,7 +9,8 @@ const GitHubRepoInfo = ({id,delet}) => {
   const [error, setError] = useState(null);
 
   const fetchRepoInfo = async () => {
-    if (!owner || !repo) return; 
+    if (!owner || !repo) return;
+
     setLoading(true);
     setError(null);
     try {
@@ -25,6 +26,7 @@ const GitHubRepoInfo = ({id,delet}) => {
       setLoading(false);
     }
   };
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (repoInfo) {
@@ -33,7 +35,7 @@ const GitHubRepoInfo = ({id,delet}) => {
     }, 60000);
 
     return () => clearInterval(interval);
-  }, [repoInfo]); 
+  }, [repoInfo]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,56 +43,119 @@ const GitHubRepoInfo = ({id,delet}) => {
   };
 
   return (
-    <div>
-      <h1>Informations sur un dépôt GitHub</h1>
-      <button
-       onClick={()=>delet(id,"GitHubRepoInfo")}
-        class="text-slate-800 p-2 rounded-r-lg inline-flex space-x-1 items-center float-right">
-        <span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-            </svg>
-        </span>
-    </button>
-      <form onSubmit={handleSubmit}>
+    <div className="bg-white shadow-lg rounded-xl p-6 max-w-xl mx-auto relative">
+      <button 
+        onClick={() => delet(id, "GitHubRepoInfo")}
+        className="absolute top-4 right-4 text-red-500 hover:text-red-700 transition-colors"
+        aria-label="Delete Component"
+      >
+        <Trash2 className="w-6 h-6" />
+      </button>
+
+      <div className="flex items-center mb-6">
+        <Github className="w-10 h-10 mr-3 text-gray-700" />
+        <h1 className="text-2xl font-bold text-gray-800">GitHub Repository Information</h1>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-4 mb-6">
         <div>
-          <label>
-            Propriétaire:
-            <input
-              type="text"
-              value={owner}
-              onChange={(e) => setOwner(e.target.value)}
-              required
-            />
+          <label htmlFor="owner" className="block text-sm font-medium text-gray-700 mb-1">
+            Repository Owner
           </label>
+          <input
+            id="owner"
+            type="text"
+            value={owner}
+            onChange={(e) => setOwner(e.target.value)}
+            required
+            placeholder="Enter repository owner"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
         </div>
+
         <div>
-          <label>
-            Nom du dépôt:
-            <input
-              type="text"
-              value={repo}
-              onChange={(e) => setRepo(e.target.value)}
-              required
-            />
+          <label htmlFor="repo" className="block text-sm font-medium text-gray-700 mb-1">
+            Repository Name
           </label>
+          <input
+            id="repo"
+            type="text"
+            value={repo}
+            onChange={(e) => setRepo(e.target.value)}
+            required
+            placeholder="Enter repository name"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
         </div>
-        <button type="submit">Voir les informations</button>
+
+        <button 
+          type="submit" 
+          className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition-colors flex items-center justify-center"
+          disabled={loading}
+        >
+          {loading ? (
+            <span className="animate-pulse">Loading...</span>
+          ) : (
+            <>
+              <Search className="w-5 h-5 mr-2" />
+              Fetch Repository Information
+            </>
+          )}
+        </button>
       </form>
 
-      {loading && <div>Chargement des informations du dépôt...</div>}
-      {error && <div>Erreur: {error}</div>}
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md mb-4">
+          <p className="font-semibold">Error:</p>
+          <p>{error}</p>
+        </div>
+      )}
+
       {repoInfo && (
-        <div>
-          <h2>{repoInfo.full_name}</h2>
-          <p><strong>Description:</strong> {repoInfo.description || 'Aucune description'}</p>
-          <p><strong>Langage principal:</strong> {repoInfo.language || 'Non spécifié'}</p>
-          <p><strong>Nombre d'étoiles:</strong> {repoInfo.stargazers_count}</p>
-          <p><strong>Nombre de forks:</strong> {repoInfo.forks_count}</p>
-          <p><strong>URL du dépôt:</strong> <a href={repoInfo.html_url} target="_blank" rel="noopener noreferrer">{repoInfo.html_url}</a></p>
-          <p><strong>Dernière mise à jour:</strong> {new Date(repoInfo.updated_at).toLocaleString()}</p>
+        <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+          <h2 className="text-xl font-bold text-gray-800 flex items-center">
+            <Github className="w-6 h-6 mr-2 text-gray-600" />
+            {repoInfo.full_name}
+          </h2>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <p className="font-medium text-gray-600">Description</p>
+              <p>{repoInfo.description || 'No description available'}</p>
+            </div>
+
+            <div>
+              <p className="font-medium text-gray-600">Primary Language</p>
+              <p>{repoInfo.language || 'Not specified'}</p>
+            </div>
+
+            <div>
+              <p className="font-medium text-gray-600">Stars</p>
+              <p className="text-yellow-600 font-bold">{repoInfo.stargazers_count}</p>
+            </div>
+
+            <div>
+              <p className="font-medium text-gray-600">Forks</p>
+              <p className="text-blue-600 font-bold">{repoInfo.forks_count}</p>
+            </div>
+          </div>
+
+          <div>
+            <p className="font-medium text-gray-600">Repository URL</p>
+            <a 
+              href={repoInfo.html_url} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-blue-500 hover:underline"
+            >
+              {repoInfo.html_url}
+            </a>
+          </div>
+
+          <div>
+            <p className="font-medium text-gray-600">Last Updated</p>
+            <p>{new Date(repoInfo.updated_at).toLocaleString()}</p>
+          </div>
         </div>
       )}
     </div>
