@@ -9,7 +9,7 @@ const NewsComponent = ({ id, delet }) => {
   const [searchInput, setSearchInput] = useState("tesla");
   const [timeLeft, setTimeLeft] = useState(30);
 
-  const API_KEY = "400b16200ac94f3ca700835b19a64c33";
+  const API_KEY = "ce1022b7513145e0a4c0860166bb840c";
 
   const fetchNews = async (query) => {
     setLoading(true);
