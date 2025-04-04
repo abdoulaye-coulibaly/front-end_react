@@ -2,15 +2,10 @@ import React, { useState } from 'react'
 import axios from 'axios';
 
  const CreatePost = ({id,delet}) => {
-
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-
-
-
     const handleSubmit = async (event) => {
         event.preventDefault();
-    
         try {
           const response = await axios.post('https://postitlaravel-production.up.railway.app/api/posts', {
             title,
@@ -23,7 +18,6 @@ import axios from 'axios';
       };
   return (
     <div>
-
     <div class="bg-white p-10 rounded-lg shadow-lg w-full max-w-lg">
     <button
      onClick={()=>delet(id,"ComponentPost")}
@@ -50,7 +44,6 @@ import axios from 'axios';
             <button type="submit" onClick={handleSubmit} class="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition duration-300">post</button>
         </form>
     </div>
-
     </div>
   )
 }

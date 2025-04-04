@@ -34,7 +34,7 @@ export default function CurrencyRow({id,delet}) {
   const fetchCurrencyData = async () => {
     const response = await axios.get("https://api.apilayer.com/exchangerates_data/latest", {
       headers: {
-        'apikey': '4MXcfotxgt23yWEk43T3fXlOT3WfOjk',
+        'apikey': 'QLzHBzYxLPlRCePkKtp0JjHpFkGCrNSY',
       },
     });
 
@@ -51,7 +51,7 @@ export default function CurrencyRow({id,delet}) {
     if (fromCurrency && toCurrency) {
       axios.get(`https://api.apilayer.com/exchangerates_data/latest?base=${fromCurrency}&symbols=${toCurrency}`, {
         headers: {
-          'apikey': '4MXcfotxgt23yWEk43T3fXlOT3WfOjk',
+          'apikey': 'QLzHBzYxLPlRCePkKtp0JjHpFkGCrNSY',
         },
       })
         .then((res) => {

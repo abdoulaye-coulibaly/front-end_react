@@ -9,15 +9,12 @@ export default function BitcoinValue() {
     useEffect(() => {
         getBitcoin();
     }, []);
-
     // htps://api.coinlayer.com/live?access_key=b75d80e6986aab2fec930759a2e1423b
     const getBitcoin = async () => {
-    const response = await axios.get("https://api.coinlayer.com/live?access_key=5b38dbcb789079ebbe26d1df5d88268");
+    const response = await axios.get("https://api.coinlayer.com/live?access_key=4MXcfotxgt23yWEk43T3fXlOT3WfOjk5");
     console.log(response)
     setBitcoins(response.data.rates)
-
     };
-
     useEffect(() => {
         const interval = setInterval(() => {
             getBitcoin();
