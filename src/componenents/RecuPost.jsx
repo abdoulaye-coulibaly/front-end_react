@@ -11,14 +11,14 @@ export default function RecuPost() {
     }, []);
 
     const getPost = async () => {
-    const response = await axios.get("http://127.0.0.1:8000/api/posts");
+    const response = await axios.get("https://postitlaravel-production.up.railway.app/api/posts");
     setRecup(response.data)
 
     };
 
     const deletePost = async (id) => {
         try {
-          await axios.delete(`http://127.0.0.1:8000/api/posts/${id}`);
+          await axios.delete(`https://postitlaravel-production.up.railway.app/api/posts/${id}`);
           console.log("Post deleted:", id);
           setData(data.filter((post) => post.id !== id));
         } catch (error) {
