@@ -11,7 +11,7 @@ export default function BitcoinValue() {
     }, []);
     // htps://api.coinlayer.com/live?access_key=b75d80e6986aab2fec930759a2e1423b
     const getBitcoin = async () => {
-    const response = await axios.get("https://api.coinlayer.com/live?access_key=4MXcfotxgt23yWEk43T3fXlOT3WfOjk5");
+    const response = await axios.get("https://api.coinlayer.com/live?access_key=3f32f16f262fc92dec2906102d9ddd38");
     console.log(response)
     setBitcoins(response.data.rates)
     };
@@ -21,7 +21,6 @@ export default function BitcoinValue() {
         }, 1000 * 60);
         return () => clearInterval(interval);
     }, []);
-
     return (
         <div className='tilt-card w-80 h-96 bg-gradient-to-br from-purple-700 to-pink-500 rounded-2xl shadow-2xl relative cursor-pointer transition-all duration-300 ease-out hover:scale-100'>
             <h1 className="max-w-sm mx-auto pt-5 mb-2 text-center font-bold text-blue-600 mb-5">Valeur des crypto-monnaies</h1>

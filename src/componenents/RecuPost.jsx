@@ -22,7 +22,6 @@ export default function RecuPost() {
       console.error("Erreur lors de la récupération des posts :", error);
     }
   };
-
   const deletePost = async (id) => {
     try {
       await axios.delete(
