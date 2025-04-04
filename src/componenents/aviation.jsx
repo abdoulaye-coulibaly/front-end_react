@@ -136,7 +136,6 @@ const Aviation = ({ id, delet }) => {
   
     return () => clearInterval(interval);
   }, [flight]);
-
   return (
     <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6 relative">
       <button 
@@ -174,7 +173,6 @@ const Aviation = ({ id, delet }) => {
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto"></div>
         </div>
       )}
-      
       {error && (
         <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded">
           <div className="flex items-start">

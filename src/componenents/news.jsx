@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const NewsComponent = () => {
+const NewsComponent = ({ id, delet }) => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -9,11 +9,9 @@ const NewsComponent = () => {
   const [searchInput, setSearchInput] = useState('tesla');
   
   const API_KEY = '400b16200ac94f3ca700835b19a64c33';
-  
   const fetchNews = async (query) => {
     setLoading(true);
     setError(null);
-    
     try {
       const fromDate = new Date();
       fromDate.setMonth(fromDate.getMonth() - 1);
@@ -46,15 +44,14 @@ const NewsComponent = () => {
     e.preventDefault();
     setSearchTerm(searchInput);
   };
-  
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('fr-FR', options);
   };
-  
   return (
     <div className="max-w-5xl mx-auto p-4">
        <button
+        onClick={() => delet(id, "NewsComponent")}
         class="text-slate-800 p-2 rounded-r-lg inline-flex space-x-1 items-center float-right">
         <span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -65,7 +62,6 @@ const NewsComponent = () => {
         </span>
     </button>
       <h1 className="text-2xl font-bold mb-6">Actualités</h1>
-      
       <form onSubmit={handleSubmit} className="mb-6">
         <div className="flex gap-2">
           <input
@@ -83,7 +79,6 @@ const NewsComponent = () => {
           </button>
         </div>
       </form>
-      
       {loading && <div className="text-center py-4">Chargement des actualités...</div>}
       
       {error && (
@@ -91,7 +86,6 @@ const NewsComponent = () => {
           {error}
         </div>
       )}
-      
       {!loading && !error && articles.length === 0 && (
         <div className="text-center py-4">Nothing found "{searchTerm}"</div>
       )}
@@ -131,7 +125,6 @@ const NewsComponent = () => {
               </a>
             </div>
           </div>
-         
         ))}
       </div>
       </div>
